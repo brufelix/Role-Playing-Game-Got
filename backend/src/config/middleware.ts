@@ -1,12 +1,22 @@
 import { Application } from 'express'
-import {  } from 'express-session'
+import session from 'express-session'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
-export default (server: Application): void => {
-    server.use(cors({
+export default (app: Application): void => {
+    app.use(cors({
       origin: '*'  
     }))
-    server.use(bodyParser.urlencoded({ extended: true }))
-    server.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.json())
+    app.use(cookieParser())
+    app.use(session({
+      secret: "sheldon",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        expires: new Date((new Date()).getTime() + 24*60*60*1000)
+      }
+    }))
 }
