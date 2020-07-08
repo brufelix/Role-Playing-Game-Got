@@ -1,0 +1,55 @@
+div.login {
+    background-color: black;
+}
+
+.image {
+    height: 650px;
+    width: 100%;
+}
+
+div.inputs {
+    height: 40px;
+    background-color: black;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.input {
+    outline: none;
+    height: 70%;
+    width: 200px;
+    border: 1;
+    border-color: grey;
+    border-radius: 5px;
+    margin-top: 1px;
+    margin-left: 5px;
+    background-color: aliceblue;
+}
+
+.button.login:active {
+    background-color: slategray;
+    color: black;
+}
+
+.button.register:active {
+    background-color: slategray;
+    color: black;
+}
+
+.button {
+    height: 80%;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.button.login {
+    background-color: green;
+}
+
+.button.register {
+    background-color: aqua; 
+}

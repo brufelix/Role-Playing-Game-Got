@@ -1,0 +1,39 @@
+.checkbox {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: black;
+    color: whitesmoke;
+    height: 650px;
+}
+
+.button:active {
+    background-color: slategray;
+    color: black;
+}
+
+.button {
+    height: 34px;
+    border: none;
+    border-radius: 10px;
+    margin-right: 8px;
+    background-color: blue;
+}
+
+div.inputs {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    background-color: black;
+}
+
+.input {
+    height: 70%;
+    width: 200px;
+    border: 1;
+    border-color: grey;
+    border-radius: 5px;
+    margin-top: 1px;
+    margin-left: 5px;
+    background-color: aliceblue;
+}

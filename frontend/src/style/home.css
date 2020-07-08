@@ -1,0 +1,83 @@
+.map {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
+.house {
+    position: absolute;
+    left: 100px;
+    top: 8em;
+}
+
+.inforTools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 700px;
+    top: 9em;
+    background-color: white;
+}
+
+.boxInforTools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgsInfor {
+    width: 5vw;
+    padding: 15px 15px 3px 15px;
+}
+
+p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.buttonExit:active {
+    background-color: slategray;
+    color: black;
+}
+
+.buttonExit {
+    position: absolute;
+    font-size: medium;
+    left: 1200px;
+    top: 20px;
+    overflow: auto;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    height: 5%;
+    width: 8%;
+    color: white;
+    background: red;
+}
+
+.divBottom {
+    position: absolute;
+    left: 596px;
+    top: 19em;
+    height: 5vh;
+    width: 50vw;
+    background-color: antiquewhite;
+}
+
+.InfoBottom {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: space-between;
+    top: 35em;
+    left: 100px;
+    height: 12vh;
+    background-color: white;
+}
+
+.imgsBottom {
+    width: 5vw;
+    height: 5vh;
+    margin: 0 4px 8px 3px;
+}
