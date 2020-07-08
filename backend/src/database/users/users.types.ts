@@ -9,7 +9,7 @@ export interface IUser {
 
 export interface IUserDocument extends IUser, Document {
     setNewHouse: (this: IUserDocument) => Promise<void>
-    sameLastNameHouse: (this: IUserDocument) => Promise<void>
+    verifyPassword: (this: IUserDocument) => Promise<void>
 }
 
 export interface IUserModel extends Model<IUserDocument> {

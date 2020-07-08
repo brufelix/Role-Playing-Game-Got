@@ -1,21 +1,29 @@
 import { Application } from 'express'
-import { createUser, getAllUsers, deleteUser, updateUser } from '../controllers/usersServices'
+import { createUser, verifyPassword, getAllUsers, deleteUser, updateUser } from '../controllers/usersServices'
 
-export default (server : Application): void => {
-    server.get("/users", (req, res) => {
+export default (app : Application): void => {
+    app.post("/signin", (req, res) => {
+        if (verifyPassword(req.body)) {
+            res.status(200).send("ok")
+        } else {
+            res.status(302).redirect("/signin")
+        }
+    })
+    
+    app.get("/users", (req, res) => {
         getAllUsers().then(users => res.status(200).send(users))
     })
 
-    server.post("/signup", (req, res) => {
+    app.post("/signup", (req, res) => {
         createUser(req.body).then(_ => res.status(200).send())
     })
 
-    server.delete("/:id", (req, res) => {
+    app.delete("/:id", (req, res) => {
         deleteUser(req.params.id)
             .then(_ => res.status(200).send())
     })
 
-    server.put("/", (req, res) => {
+    app.put("/", (req, res) => {
         updateUser(`${req.query.id}`,`${req.query.namehouse}`)
             .then(_ => res.status(200).send())
     })

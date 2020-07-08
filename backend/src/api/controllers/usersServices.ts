@@ -1,20 +1,26 @@
 import { UserModel } from '../../database/users/users.model'
 import { IUser } from '../../database/users/users.types'
+import bcrypt from 'bcrypt'
 
 export async function createUser(user: IUser) {
+    const salt = bcrypt.genSaltSync()
+    user.password = bcrypt.hashSync(user.password, salt)
+    
     const newUser = new UserModel({
         ...user
     })
     newUser.save()
 }
 
-export async function verifyUser(user: IUser){
-    let boolean = false
-    UserModel.find({email: user.email}, (err, result) => {
-        if (result[0].email && result[0].password === user.password){
-            boolean = true
+export async function verifyPassword(user: IUser){
+    let boolean = null
+    UserModel.findOne({email: user.email}, (err, result) => {
+        if (result) {
+            boolean = bcrypt.compareSync(user.password, result.password) ? true : false 
+        } else {
+            boolean = false
         }
-    } )
+    })
     return boolean
 }
 

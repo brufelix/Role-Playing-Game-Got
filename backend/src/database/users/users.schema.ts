@@ -1,7 +1,4 @@
 import { Schema } from 'mongoose'
-import { findByHouseName, findOneOrCreate } from './users.statics'
-import { sameLastNameHouse, setNewHouse } from './users.methods'
-
 
 const UserSchema = new Schema({
     name: {
@@ -22,11 +19,5 @@ const UserSchema = new Schema({
         required: true
     },
 })
-
-UserSchema.statics.findOne = findOneOrCreate
-UserSchema.statics.findByHouseName = findByHouseName
-
-UserSchema.methods.sameLastNameHouse = sameLastNameHouse
-UserSchema.methods.setNewHouse = setNewHouse
 
 export default UserSchema

@@ -12,6 +12,7 @@ export default (app: Application): void => {
     app.use(bodyParser.json())
     app.use(cookieParser())
     app.use(session({
+      name: "user",
       secret: "sheldon",
       resave: false,
       saveUninitialized: false,
