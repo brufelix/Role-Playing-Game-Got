@@ -1,9 +1,12 @@
 import { Request, Response } from 'express'
+import jwt from 'jwt-simple'
+import bcrypt from 'bcrypt'
 import { UserModel } from '../../database/users/users.model'
 import { IUser } from '../../database/users/users.types'
-import bcrypt from 'bcrypt'
 
-export async function createUser(request: Request, response: Response) {
+const authSecret = "fa#*sfaj12$5%%fas"
+
+export async function signup(request: Request, response: Response) {
     let user: IUser = request.body 
     const saltRounds = 10
     
@@ -12,20 +15,31 @@ export async function createUser(request: Request, response: Response) {
         .then(hash => {
             user.password = hash             
             const newUser = new UserModel({ ...user })
-            newUser.save() 
+            newUser.save()
+            return newUser._id
         })
-        .then(_ => response.status(200).send())
+        .then(_id => {
+            const payload = {id: _id}
+            response.status(200).json({
+                auth: true,
+                token: jwt.encode(payload, authSecret)
+            }) 
+        })
 }
 
-export async function verifyPassword(request: Request, response: Response){
+export async function signin(request: Request, response: Response){
     let user: IUser = request.body
 
     UserModel.findOne({ email: user.email }, (err, result) => {
         if (result) {
             bcrypt.compare(user.password, result.password)
             .then(res => {
+                const payload = {id: result._id}
                 if (res) {
-                    response.status(200).send("valid")
+                    response.status(200).json({
+                        auth: true,
+                        token: jwt.encode(payload, authSecret)
+                    })
                 } else {
                     response.status(401).send("Erro na senha do Usuário.")
                 }

@@ -3,9 +3,22 @@ import React, { Component } from 'react'
 import { map, comercio, magia, sabedoria, temor, 
 moeda, pergaminho, suditos } from '../components/imgsRequires'
 import { selectImage } from '../common/functions'
+import { IProps } from '../interfaces/interfaces'
 import '../style/home.css'
 
-export default class Home extends Component {
+export default class Home extends Component<IProps> {
+
+    UNSAFE_componentWillMount() {
+        if (!localStorage.getItem("currentUser")){
+            this.props.history.push("/signin")
+        } 
+    }
+
+    logout() {
+        localStorage.removeItem("currentUser")
+        this.props.history.push("/signin")
+    }
+
     render() {
         let image = selectImage("houseStark")
     
@@ -13,7 +26,7 @@ export default class Home extends Component {
             <div>
                 <img src={map} alt="Mapa" className="map" />
                 <img src={image} alt="Casa" className="house"/>
-                <button className="buttonExit">Sair</button>
+                <button className="buttonExit" onClick={() => this.logout()}>Sair</button>
                 <div className="inforTools" >
                     <div className="boxInforTools">
                         <img src={comercio} alt="Casa" className="imgsInfor"/>

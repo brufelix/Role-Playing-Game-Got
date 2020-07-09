@@ -8,14 +8,14 @@ import { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell, hous
 houseBaratheon, houseArryn  } from '../components/imgsRequires'
 import { nameChanged, emailChanged, passwordChanged, houseChanged, clear } from '../react-redux/actions'
 import CheckBox from '../components/checkBoxOfSelectHouse'
-import { IState, IProps, IGot } from '../interfaces/interfaces'
+import { IProps, responseSignin, IGot } from '../interfaces/interfaces'
 import baseURL from '../common/baseURL'
 import '../style/register.css'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & IProps
 
-class Register extends Component<Props, IState>{
+class Register extends Component<Props>{
     _isMounted = false
     constructor(props) {
         super(props)
@@ -39,16 +39,14 @@ class Register extends Component<Props, IState>{
 
     handleClickSignup = async () => {
         if (this.validationData()){
-            await axios.post(`${baseURL}/signup`, {...this.props.state })
+            await axios.post<responseSignin>(`${baseURL}/signup`, {...this.props.state })
                 .then(res => {
-                    if (res.status === 200) {
+                    if (res.data.auth) {
+                        localStorage.setItem("currentUser", JSON.stringify(res.data.token))
                         this.props.history.push("/home")
                         this.props.clear()
-                    } else {
-                        this.props.history.push("/signup")
                     }
                 })
-
         } else {
             alert("Preencha Nome, Email, Senha, e selecione uma casa!")
         }

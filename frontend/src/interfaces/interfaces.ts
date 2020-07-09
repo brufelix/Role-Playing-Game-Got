@@ -19,6 +19,11 @@ export interface IAction {
     payload: string
 }
 
+export interface responseSignin {
+    auth: boolean,
+    token: string
+}
+
 export interface IGot {
     got: IState
 }
