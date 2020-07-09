@@ -40,8 +40,14 @@ class Register extends Component<Props, IState>{
     handleClickSignup = async () => {
         if (this.validationData()){
             await axios.post(`${baseURL}/signup`, {...this.props.state })
-                .then(_ => this.props.clear())
-                .then(_ => this.props.history.push("/home"))
+                .then(res => {
+                    if (res.status === 200) {
+                        this.props.history.push("/home")
+                        this.props.clear()
+                    } else {
+                        this.props.history.push("/signup")
+                    }
+                })
 
         } else {
             alert("Preencha Nome, Email, Senha, e selecione uma casa!")

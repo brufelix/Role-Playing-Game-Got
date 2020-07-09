@@ -1,35 +1,39 @@
+import { Request, Response } from 'express'
 import { UserModel } from '../../database/users/users.model'
 import { IUser } from '../../database/users/users.types'
 import bcrypt from 'bcrypt'
 
-export async function createUser(user: IUser) {
-    const salt = bcrypt.genSaltSync()
-    user.password = bcrypt.hashSync(user.password, salt)
+export async function createUser(request: Request, response: Response) {
+    let user: IUser = request.body 
+    const saltRounds = 10
     
-    const newUser = new UserModel({
-        ...user
-    })
-    newUser.save()
+    bcrypt.genSalt(saltRounds)
+        .then(salt => { return bcrypt.hash(user.password, salt) })
+        .then(hash => {
+            user.password = hash             
+            const newUser = new UserModel({ ...user })
+            newUser.save() 
+        })
+        .then(_ => response.status(200).send())
 }
 
-export async function verifyPassword(user: IUser){
-    let boolean = null
-    UserModel.findOne({email: user.email}, (err, result) => {
+export async function verifyPassword(request: Request, response: Response){
+    let user: IUser = request.body
+
+    UserModel.findOne({ email: user.email }, (err, result) => {
         if (result) {
-            boolean = bcrypt.compareSync(user.password, result.password) ? true : false 
+            bcrypt.compare(user.password, result.password)
+            .then(res => {
+                if (res) {
+                    response.status(200).send("valid")
+                } else {
+                    response.status(401).send("Erro na senha do Usuário.")
+                }
+            })
         } else {
-            boolean = false
+            response.status(400).send("E-mail não encontrado.")
         }
     })
-    return boolean
-}
-
-export async function getAllUsers() {
-    let users = null
-    await UserModel.find((err, result) => {
-        users = result
-    })
-    return users
 }
 
 export async function deleteUser(id: string) {

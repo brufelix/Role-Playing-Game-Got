@@ -30,8 +30,13 @@ class Login extends Component<Props, IUser> {
 
     handleClickSignin = (): void => {        
         axios.post(`${baseURL}/signin`, {...this.props.state })
-            .then(_ => this.props.clear())
-            .then(_ => this.props.history.push("/home"))
+            .then(res => {
+                if (res.data === "valid") {
+                    this.props.history.push("/home")
+                } else {
+                    this.props.clear()
+                }
+            })
     }
 
     render() {
@@ -44,7 +49,7 @@ class Login extends Component<Props, IUser> {
                     <div>
                         <input className="input" type="text" placeholder="Insira seu E-mail..." onChange={emailChanged}
                         value={this.props.email}/>
-                        <input className="input" type="text" placeholder="Senha..."  onChange={passwordChanged}
+                        <input className="input" type="password" placeholder="Senha..."  onChange={passwordChanged}
                         value={this.props.password}/>
                     </div>
                     <div>
