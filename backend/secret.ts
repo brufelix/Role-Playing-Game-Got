@@ -1,0 +1,1 @@
+export const authSecret = "fa#*sfaj12$5%%fas"

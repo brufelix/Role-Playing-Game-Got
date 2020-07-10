@@ -22,6 +22,7 @@ class Login extends Component<Props, IUser> {
 
     UNSAFE_componentWillMount() {
         this._isMounted = false
+        this.props.clear()
     }
 
     componentDidMount() {
