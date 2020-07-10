@@ -48,3 +48,9 @@ export async function signin(request: Request, response: Response){
         }
     })
 }
+
+export async function getHouse(request: Request, response: Response) {
+    await UserModel.findOne({ email: request.body.email }, (err, user) => {
+        response.status(200).json({ house: user.house })
+    })
+}

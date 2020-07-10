@@ -8,7 +8,7 @@ import { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell, hous
 houseBaratheon, houseArryn  } from '../components/imgsRequires'
 import { nameChanged, emailChanged, passwordChanged, houseChanged, clear } from '../react-redux/actions'
 import CheckBox from '../components/checkBoxOfSelectHouse'
-import { IProps, responseSignin, IGot } from '../interfaces/interfaces'
+import { IProps, postSignin, IGot } from '../interfaces/interfaces'
 import baseURL from '../common/baseURL'
 import '../style/register.css'
 
@@ -39,12 +39,11 @@ class Register extends Component<Props>{
 
     handleClickSignup = async () => {
         if (this.validationData()){
-            await axios.post<responseSignin>(`${baseURL}/signup`, {...this.props.state })
+            await axios.post<postSignin>(`${baseURL}/signup`, {...this.props.state })
                 .then(res => {
                     if (res.data.auth) {
                         localStorage.setItem("currentUser", JSON.stringify(res.data.token))
                         this.props.history.push("/home")
-                        this.props.clear()
                     }
                 })
         } else {
@@ -66,15 +65,15 @@ class Register extends Component<Props>{
                         <button onClick={this.handleClickSignup} className="button">Cadastra-se</button>
                 </div>
                 <div className="checkbox">
-                    <CheckBox setHouse={houseChanged} img={houseTyrell} name="Casa de Tyrell"/>
-                    <CheckBox setHouse={houseChanged} img={houseTully} name="Casa de Tully"/>
-                    <CheckBox setHouse={houseChanged} img={houseTargaryen} name="Casa de Targaryen"/>
-                    <CheckBox setHouse={houseChanged} img={houseStark} name="Casa de Stark"/>
-                    <CheckBox setHouse={houseChanged} img={houseMartell} name="Casa de Martell"/>
-                    <CheckBox setHouse={houseChanged} img={houseLannister} name="Casa de Lannister"/>
-                    <CheckBox setHouse={houseChanged} img={houseGreyjoy} name="Casa de Greyjoy"/>
-                    <CheckBox setHouse={houseChanged} img={houseBaratheon} name="Casa de Baratheon"/>
-                    <CheckBox setHouse={houseChanged} img={houseArryn} name="Casa de Arryn"/>
+                    <CheckBox setHouse={houseChanged} img={houseTyrell} name="houseTyrell"/>
+                    <CheckBox setHouse={houseChanged} img={houseTully} name="houseTully"/>
+                    <CheckBox setHouse={houseChanged} img={houseTargaryen} name="houseTargaryen"/>
+                    <CheckBox setHouse={houseChanged} img={houseStark} name="houseStark"/>
+                    <CheckBox setHouse={houseChanged} img={houseMartell} name="houseMartell"/>
+                    <CheckBox setHouse={houseChanged} img={houseLannister} name="houseLannister"/>
+                    <CheckBox setHouse={houseChanged} img={houseGreyjoy} name="houseGreyjoy"/>
+                    <CheckBox setHouse={houseChanged} img={houseBaratheon} name="houseBaratheon"/>
+                    <CheckBox setHouse={houseChanged} img={houseArryn} name="houseArryn"/>
                 </div>
             </div>
         )

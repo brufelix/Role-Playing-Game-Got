@@ -19,14 +19,18 @@ export interface IAction {
     payload: string
 }
 
-export interface responseSignin {
+export interface postSignin {
     auth: boolean,
     token: string
+}
+
+export interface postHouse {
+    house: string
 }
 
 export interface IGot {
     got: IState
 }
 
-export interface IProps extends RouteComponentProps, IState {}
+export interface IProps extends RouteComponentProps {}
 

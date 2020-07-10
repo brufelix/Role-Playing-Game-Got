@@ -1,27 +1,45 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { connect, ConnectedProps } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { map, comercio, magia, sabedoria, temor, 
 moeda, pergaminho, suditos } from '../components/imgsRequires'
+import { clear, houseChanged } from '../react-redux/actions'
 import { selectImage } from '../common/functions'
-import { IProps } from '../interfaces/interfaces'
+import { IProps, IGot, postHouse } from '../interfaces/interfaces'
+import baseURL from '../common/baseURL'
 import '../style/home.css'
 
-export default class Home extends Component<IProps> {
+type propsFromRedux = ConnectedProps<typeof connector>
+type Props = propsFromRedux & IProps
+
+class Home extends Component<Props> {
+
+    constructor(props){
+        super(props)
+        this.logout.bind(this)
+    }
 
     UNSAFE_componentWillMount() {
+        const { houseChanged } = this.props
         if (!localStorage.getItem("currentUser")){
             this.props.history.push("/signin")
-        } 
+        }
+        axios.post<postHouse>(`${baseURL}/gethouse`, {email: this.props.email})
+            .then(res => {
+                houseChanged(res.data.house)
+            })
     }
 
     logout() {
         localStorage.removeItem("currentUser")
+        this.props.clear()
         this.props.history.push("/signin")
     }
 
     render() {
-        let image = selectImage("houseStark")
-    
+        let image = selectImage(this.props.house)
         return(
             <div>
                 <img src={map} alt="Mapa" className="map" />
@@ -29,19 +47,19 @@ export default class Home extends Component<IProps> {
                 <button className="buttonExit" onClick={() => this.logout()}>Sair</button>
                 <div className="inforTools" >
                     <div className="boxInforTools">
-                        <img src={comercio} alt="Casa" className="imgsInfor"/>
+                        <img src={comercio} alt="comércio" className="imgsInfor"/>
                         <p>8000</p>
                     </div>
                     <div className="boxInforTools">
-                        <img src={magia} alt="Casa" className="imgsInfor"/>
+                        <img src={magia} alt="Magia" className="imgsInfor"/>
                         <p>8000</p>
                     </div>
                     <div className="boxInforTools">
-                        <img src={sabedoria} alt="Casa" className="imgsInfor"/>
+                        <img src={sabedoria} alt="Sabedoria" className="imgsInfor"/>
                         <p>8000</p>
                     </div>
                     <div className="boxInforTools">
-                        <img src={temor} alt="Casa" className="imgsInfor"/>
+                        <img src={temor} alt="Temor" className="imgsInfor"/>
                         <p>8000</p>
                     </div>
                 </div>
@@ -64,3 +82,9 @@ export default class Home extends Component<IProps> {
         )
     }
 }
+
+const mapStateToProps = (state: IGot) => ({ house: state.got.house, email: state.got.email })
+const mapDispatchToProps = (dispatch: any) => bindActionCreators({ clear, houseChanged }, dispatch)
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+export default connector(Home)

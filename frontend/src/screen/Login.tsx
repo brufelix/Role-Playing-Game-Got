@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import GOT from '../assets/images/gameOfThrones.jpg'
 import baseURL from '../common/baseURL'
-import { IUser, IProps,responseSignin, IGot } from '../interfaces/interfaces'
+import { IUser, IProps,postSignin, IGot } from '../interfaces/interfaces'
 import { emailChanged, passwordChanged, clear} from '../react-redux/actions'
 import '../style/login.css'
 
@@ -22,7 +22,6 @@ class Login extends Component<Props, IUser> {
 
     UNSAFE_componentWillMount() {
         this._isMounted = false
-        this.props.clear()
     }
 
     componentDidMount() {
@@ -30,7 +29,7 @@ class Login extends Component<Props, IUser> {
     }
 
     handleClickSignin = (): void => {        
-        axios.post<responseSignin>(`${baseURL}/signin`, {...this.props.state })
+        axios.post<postSignin>(`${baseURL}/signin`, {...this.props.state })
             .then(res => {
                 if (res.data.auth) {
                     localStorage.setItem("currentUser", JSON.stringify(res.data.token))
