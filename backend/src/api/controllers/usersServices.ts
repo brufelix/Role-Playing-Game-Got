@@ -3,8 +3,7 @@ import jwt from 'jwt-simple'
 import bcrypt from 'bcrypt'
 import { UserModel } from '../../database/users/users.model'
 import { IUser } from '../../database/users/users.types'
-
-const authSecret = "fa#*sfaj12$5%%fas"
+import { authSecret } from '../../../secret'
 
 export async function signup(request: Request, response: Response) {
     let user: IUser = request.body 
@@ -48,12 +47,4 @@ export async function signin(request: Request, response: Response){
             response.status(400).send("E-mail não encontrado.")
         }
     })
-}
-
-export async function deleteUser(id: string) {
-    await UserModel.deleteOne({_id: id})
-}
-
-export async function updateUser(id: string, nameHouse: string) {
-    await UserModel.updateOne({ _id: id }, {$set: { house: nameHouse }})
 }

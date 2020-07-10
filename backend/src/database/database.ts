@@ -7,7 +7,7 @@ let database: Mongoose.Connection
 export const connect = (): void => {
     const uri: string = "mongodb://localhost/got"
     
-    Mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true ,useFindAndModify: false })
+    Mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true ,useFindAndModify: false, useCreateIndex: true })
 
     if(database){ return }
 
