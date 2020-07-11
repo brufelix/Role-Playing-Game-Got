@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux'
 
 import { map, comercio, magia, sabedoria, temor, 
 moeda, pergaminho, suditos } from '../components/imgsRequires'
-import { clear, houseChanged, valuesChanged } from '../react-redux/actions'
+import { clear, houseChanged, valuesChanged, getHouseName, getValuesOfSkills } from '../react-redux/actions'
 import { selectImage } from '../common/functions'
-import { IProps, IGot, postHouse,  } from '../interfaces/interfaces'
+import { IProps, IGot } from '../interfaces/interfaces'
 import baseURL from '../common/baseURL'
 import '../style/home.css'
 
@@ -22,17 +22,12 @@ class Home extends Component<Props> {
     }
 
     UNSAFE_componentWillMount() {
-        const { houseChanged, valueChanged } = this.props
+        const { email, getHouseName, getValuesOfSkills } = this.props
         if (!localStorage.getItem("currentUser")){
             this.props.history.push("/signin")
         }
-        axios.post<postHouse>(`${baseURL}/houses`, {email: this.props.email})
-            .then(res => {
-                houseChanged(res.data.house)
-            }).then(_ => {
-                axios.post(`${baseURL}/game`, { email: this.props.email })
-                    .then(res => valueChanged(res.data))
-            })
+        getValuesOfSkills(email)
+        getHouseName(email)
     }
 
     logout() {
@@ -70,14 +65,14 @@ class Home extends Component<Props> {
                 <div className="InfoBottom">
                 <div className="boxInforTools">
                         <img  className="imgsBottom" alt="Suditos" src={suditos} /> 
-                        <p>{}</p>   
+                        <p>{this.props.values.suddios}</p>   
                     </div>
                     <div className="boxInforTools">
                         <img  className="imgsBottom" alt="Pergaminho" src={pergaminho} />    
                     </div>
                     <div className="boxInforTools">
                         <img  className="imgsBottom" alt="Moeda" src={moeda} />    
-                        <p>{}</p>
+                        <p>{this.props.values.currency}</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +81,8 @@ class Home extends Component<Props> {
 }
 
 const mapStateToProps = (state: IGot) => ({ house: state.got.house, email: state.got.email, values: state.got.values })
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({ clear, houseChanged, valueChanged: valuesChanged }, dispatch)
+const mapDispatchToProps = (dispatch: any) => 
+    bindActionCreators({ clear, houseChanged, valueChanged: valuesChanged, getHouseName, getValuesOfSkills }, dispatch)
 const connector = connect(mapStateToProps, mapDispatchToProps)
 
 export default connector(Home)

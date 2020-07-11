@@ -4,5 +4,5 @@ import { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell,
 export const selectImage = (nameImg: string) => {
     const imgs = { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell,
         houseLannister, houseGreyjoy, houseBaratheon, houseArryn }
-    return imgs[nameImg]
+    return imgs[nameImg] 
 }

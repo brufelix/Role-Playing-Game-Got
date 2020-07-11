@@ -8,7 +8,7 @@ import { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell, hous
 houseBaratheon, houseArryn  } from '../components/imgsRequires'
 import { nameChanged, emailChanged, passwordChanged, houseChanged, clear } from '../react-redux/actions'
 import CheckBox from '../components/checkBoxOfSelectHouse'
-import { IProps, postSignin, IGot, IGame } from '../interfaces/interfaces'
+import { IProps, postSignin, IGot } from '../interfaces/interfaces'
 import baseURL from '../common/baseURL'
 import '../style/register.css'
 
@@ -32,7 +32,13 @@ class Register extends Component<Props>{
     }
 
     validationData = (): boolean => {
-        for (const [, value]  of Object.entries(this.props.state)){
+        const stateObj = {
+            email: this.props.state.email,
+            name: this.props.state.name,
+            password: this.props.state.password,
+            house: this.props.state.house
+        }
+        for (const [, value]  of Object.entries(stateObj)){
             if (value.trim() === "") return false
         }
         return true

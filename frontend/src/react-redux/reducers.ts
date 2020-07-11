@@ -17,7 +17,7 @@ export default ( state = INITIAL_STATE, action: IAction ) => {
         case CLEAR:
             return { ...state, name: "", email: "", password: "", house: "" }
         case VALUESCHANGED:
-            return { ...state, values: { ...action.payload }}
+            return { ...state, values: {...action.payload.data} }
         default:
             return state
     }

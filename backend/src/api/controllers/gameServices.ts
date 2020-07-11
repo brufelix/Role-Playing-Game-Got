@@ -15,14 +15,18 @@ export async function insertValues(request: Request, response: Response) {
 export async function getValuesOfGame(request: Request, response: Response) {
     GameModel.findOne({ user: request.body.email })
         .then(res => {
-            const values = {
-                suddios: res.suddios,
-                tear: res.tear,
-                wisdom: res.wisdom,
-                commerce: res.commerce,
-                magic: res.magic,
-                currency: res.currency
+            if( res ) {
+                const values = {
+                    suddios: res.suddios,
+                    tear: res.tear,
+                    wisdom: res.wisdom,
+                    commerce: res.commerce,
+                    magic: res.magic,
+                    currency: res.currency
+                }
+                response.status(200).json({data: values})
+            } else {
+                response.status(401).send()
             }
-            response.status(200).json({data: values})
         })
 }
