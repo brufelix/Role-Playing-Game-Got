@@ -4,7 +4,17 @@ export interface IUser {
     name?: string,
     email: string,
     password: string,
-    house?: string
+    house?: string,
+    values: IValues
+}
+
+export interface IValues {
+    suddios: number,
+    tear: number,
+    wisdom: number,
+    commerce: number,
+    magic: number,
+    currency: number
 }
 
 export interface IState {
@@ -12,16 +22,27 @@ export interface IState {
     email: string,
     password: string,
     house: string,
+    values: IValues
 }
 
 export interface IAction {
     type: string,
-    payload: string
+    payload: any
 }
 
 export interface postSignin {
     auth: boolean,
     token: string
+}
+
+export interface IGame {
+    user: string,
+    suddios: number,
+    tear: number,
+    wisdom: number,
+    commerce: number,
+    magic: number,
+    currency: number
 }
 
 export interface postHouse {

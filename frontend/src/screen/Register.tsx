@@ -8,7 +8,7 @@ import { houseTyrell, houseTully, houseTargaryen, houseStark, houseMartell, hous
 houseBaratheon, houseArryn  } from '../components/imgsRequires'
 import { nameChanged, emailChanged, passwordChanged, houseChanged, clear } from '../react-redux/actions'
 import CheckBox from '../components/checkBoxOfSelectHouse'
-import { IProps, postSignin, IGot } from '../interfaces/interfaces'
+import { IProps, postSignin, IGot, IGame } from '../interfaces/interfaces'
 import baseURL from '../common/baseURL'
 import '../style/register.css'
 
@@ -24,6 +24,7 @@ class Register extends Component<Props>{
 
     UNSAFE_componentWillMount() {
         this._isMounted = false
+
     }
 
     componentDidMount() {
@@ -37,14 +38,22 @@ class Register extends Component<Props>{
         return true
     }
 
-    handleClickSignup = async () => {
+    handleClickSignup = () => {
         if (this.validationData()){
-            await axios.post<postSignin>(`${baseURL}/signup`, {...this.props.state })
+            axios.post<postSignin>(`${baseURL}/signup`, {...this.props.state })
                 .then(res => {
                     if (res.data.auth) {
                         localStorage.setItem("currentUser", JSON.stringify(res.data.token))
-                        this.props.history.push("/home")
-                    }
+                    }}).then(_ => {
+                        axios.post(`${baseURL}/game/values`, {
+                            user: this.props.email,
+                            suddios: Math.floor(Math.random() * 1000),
+                            tear: Math.floor(Math.random() * 1000),
+                            wisdom: Math.floor(Math.random() * 1000),
+                            commerce: Math.floor(Math.random() * 1000),
+                            magic: Math.floor(Math.random() * 1000),
+                            currency: Math.floor(Math.random() * 1000)
+                    }).then(_ => { this.props.history.push("/home") })
                 })
         } else {
             alert("Preencha Nome, Email, Senha, e selecione uma casa!")

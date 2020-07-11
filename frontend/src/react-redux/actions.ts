@@ -1,4 +1,5 @@
-import { NAME_CHANGED, EMAIL_CHANGED, PASSWORD_CHANGED, HOUSE_CHANGED, CLEAR } from '../react-redux/actionsTypes'
+import { NAME_CHANGED, EMAIL_CHANGED, PASSWORD_CHANGED, HOUSE_CHANGED, CLEAR, VALUESCHANGED } from '../react-redux/actionsTypes'
+import { IValues } from '../interfaces/interfaces'
 
 export const nameChanged = (e: any) => ({ 
     type: NAME_CHANGED,
@@ -23,3 +24,8 @@ export const houseChanged = (name: string) => ({
 export const clear = () => ({
     type: CLEAR
 })
+
+export const valuesChanged = (values: IValues) => ({
+    type: VALUESCHANGED,
+    payload: values
+}) 
