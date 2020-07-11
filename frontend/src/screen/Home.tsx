@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { connect, ConnectedProps } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { map, comercio, magia, sabedoria, temor, 
 moeda, pergaminho, suditos } from '../components/imgsRequires'
+import Parchment from '../components/parchment'
 import { clear, houseChanged, valuesChanged, getHouseName, getValuesOfSkills } from '../react-redux/actions'
-import { selectImage } from '../common/functions'
+import { selectImage, items } from '../common/functions'
 import { IProps, IGot } from '../interfaces/interfaces'
-import baseURL from '../common/baseURL'
 import '../style/home.css'
 
 type propsFromRedux = ConnectedProps<typeof connector>
@@ -61,14 +60,17 @@ class Home extends Component<Props> {
                         <p>{this.props.values.tear}</p>
                     </div>
                 </div>
-                <div className="divBottom" ></div>
+                <div className="divBottom" >
+                    <Parchment items={items}/>
+                </div>
                 <div className="InfoBottom">
                 <div className="boxInforTools">
                         <img  className="imgsBottom" alt="Suditos" src={suditos} /> 
                         <p>{this.props.values.suddios}</p>   
                     </div>
                     <div className="boxInforTools">
-                        <img  className="imgsBottom" alt="Pergaminho" src={pergaminho} />    
+                        <img  className="imgsBottom" alt="Pergaminho" src={pergaminho} />
+                        <p>{items.length}</p>    
                     </div>
                     <div className="boxInforTools">
                         <img  className="imgsBottom" alt="Moeda" src={moeda} />    

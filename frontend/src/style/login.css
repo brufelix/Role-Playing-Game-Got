@@ -1,55 +1,49 @@
-div.login {
-    background-color: black;
+.container-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: url("../assets/images/gameOfThrones.jpg");
+    background-size: 700px;
 }
 
-.image {
-    height: 650px;
-    width: 100%;
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 330px;
+    border-width: 1px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    background-color: darkgrey;
+    opacity: 0.7;
 }
 
-div.inputs {
-    height: 40px;
-    background-color: black;
+.title {
+    font-weight: bold;
+}
+
+.input {
+    outline: none;
+    border-color: black;
+    width: 300px;
+    height: 35px;
+}
+
+.buttons {
+    border-radius: 5px;
+    outline: none;
+    margin-top: 7px;
+    width: 305px;
+    height: 30px;
+    font-weight: bold;
+    font-family: 'Arial Narrow Bold';
 }
 
 .link {
     text-decoration: none;
     color: black;
-}
-
-.input {
-    outline: none;
-    height: 70%;
-    width: 200px;
-    border: 1;
-    border-color: grey;
-    border-radius: 5px;
-    margin-top: 1px;
-    margin-left: 5px;
-    background-color: aliceblue;
-}
-
-.button.login:active {
-    background-color: slategray;
-    color: black;
-}
-
-.button.register:active {
-    background-color: slategray;
-    color: black;
-}
-
-.button {
-    height: 80%;
-    border: none;
-    border-radius: 5px;
-    margin-left: 5px;
-}
-
-.button.login {
-    background-color: green;
-}
-
-.button.register {
-    background-color: aqua; 
 }
