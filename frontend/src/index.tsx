@@ -9,15 +9,15 @@ import rootReducers from './react-redux/rootReducer'
 import App from './App'
 import './style/index.css'
 
-declare global {
-    interface Window {
-      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    }
-}
+// declare global {
+//     interface Window {
+//       __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//     }
+// }
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// const store = (createStore)(rootReducers, composeEnhancers(applyMiddleware(thunk, promise)))
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-const store = (createStore)(rootReducers, composeEnhancers(applyMiddleware(thunk, promise)))
+const store = applyMiddleware(thunk, promise)(createStore)(rootReducers)
 
 ReactDOM.render( 
     <Provider store={store}>
