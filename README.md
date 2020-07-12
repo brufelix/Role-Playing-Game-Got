@@ -13,47 +13,45 @@ Jogo role-playing game baseado na série de televisão Game of Thrones.
 - **Motivação**
   - Feito para a pratica da integração entre typescript, React, mongoDB e redux.
   
-  This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi iniciado com [Create React App --template typescript](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Scripts disponíveis
 
-In the project directory, you can run:
+No diretório do projeto, você pode executar:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Executa o aplicativo no modo de desenvolvimento.<br />
+Acessar [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A página será recarregada se você fizer edições.<br />
+Você também verá erros de fiapos no console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o corredor de teste no modo de observação interativo.<br />
+Veja a seção sobre [executando testes](https://facebook.github.io/create-react-app/docs/running-tests) para mais informações.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Cria o aplicativo para produção na pasta `build`.<br />
+Agrupa corretamente o React no modo de produção e otimiza a construção para obter o melhor desempenho.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+A compilação é minificada e os nomes de arquivos incluem os hashes.<br />
+Seu aplicativo está pronto para ser implantado!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Veja a seção sobre [deployment](https://facebook.github.io/create-react-app/docs/deployment) para mais informações.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Nota: esta é uma operação unidirecional. Depois de "ejetar", você não pode voltar!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Se você não estiver satisfeito com a ferramenta de criação e as opções de configuração, poderá "ejetar" a qualquer momento. Este comando removerá a dependência de compilação única do seu projeto.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Em vez disso, ele copiará todos os arquivos de configuração e as dependências transitivas (webpack, Babel, ESLint, etc) diretamente no seu projeto, para que você tenha controle total sobre eles. Todos os comandos, exceto `ejetar`, ainda funcionarão, mas apontarão para os scripts copiados para que você possa ajustá-los. Neste ponto, você está por sua conta.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Saber mais
 
-## Learn More
+Você pode aprender mais no [Documentação sobre Create React App](https://facebook.github.io/create-react-app/docs/getting-started).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Para aprender React, consulte o [Documentação sobre React](https://reactjs.org/).
