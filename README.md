@@ -1,4 +1,4 @@
-# Role-Playing-Game-Got
+# Role-Playing-Game-Got (Em Desenvolvimento)
 Jogo role-playing game baseado na série de televisão Game of Thrones.
 <p>
 <image src="https://github.com/brufelix/Role-Playing-Game-Got/blob/master/frontend/public/image/signinGot.png" title="signin" />  
